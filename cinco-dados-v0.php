@@ -1,0 +1,158 @@
+<?php
+
+/**
+ * Cinco dados - cinco-dados.php
+ *
+ * @author Aaron Garcia Sanavia
+ *
+ */
+$numdados = 5;
+
+// Caracteres UTF8( de dados 1 a 6)
+$tcharDados = [
+  1 => "&#9856;", 2 => "&#9857;",
+  3 => "&#9858;", 4 => "&#9859;",
+  5 => "&#9860;",  6 => "&#9861;"
+];
+
+/* Funciones auxiliares */
+
+/**
+ *  Genera un array con valores de dados 1..6
+ * @param int $numdados - tamaño de array generado
+ * @return int[] array generado
+ */
+function generarDados(int $numdados): array
+{
+  $dados = [];
+  for ($i = 0; $i < $numdados; $i++) {
+    $tdados[] = rand(1, 6);
+  }
+  return $tdados;
+}
+
+/**
+ * Calcula el valor de los datos
+ * Suma de todos los valores menos el mas alto y el mas bajo
+ * @param array $tdados
+ * @return int
+ */
+function calcularPuntos( array $tdados): int
+{
+  global $numdados;
+  $maximo=0;
+  $minimo=7;
+   for ($i = 0; $i < $numdados; $i++) {
+    if ($tdados[$i]<$minimo){
+      $minimo=$tdados[$i];
+    }
+    if ($tdados[$i]>$maximo){
+      $maximo=$tdados[$i];
+    }
+    return array_sum($tdados) - $maximo - $minimo;
+}
+}
+
+/**
+ * Gemera um mensaje indicando el jugador ganador o si ha habido empate
+ * @param int $puntos1  - puntos del primer jugador
+ * @param int $puntos2  - puntos del segundo jugador
+ * @return string - Mensaje generado
+ */
+function generarMensajeGanador(int $puntos1, int $puntos2): string
+{
+  if ($puntos1 > $puntos2) {
+    return "Ha ganado el jugador 1";
+  } elseif ($puntos2 > $puntos1) {
+    return "Ha ganado el jugador 2";
+  } else {
+    return "Ha habido un empate";
+  }
+}
+
+// Función que genera un mensaje para múltiples ganadores
+// Recibe un lista de parámetros variables
+/**
+ *   Genera el hmtl con la imagne asociado a el valor del dado
+ * @param array $tdados - valores de los dados
+ * @return string - cadena html donde se incluye el caracter asociado a valor de cada dado
+ */
+function generarImagenes( array $tdados): string
+{
+  $msg = "";
+  global $tcharDados;
+    // COMPLETAR SOLO MUESTRA EL VALOR DE UN DADO 
+   $valor = $tdados[0];
+   $msg .= "<span style='font-size:100px;'>" . $tcharDados[ $valor] . "</span>";
+   $valor = $tdados[1];
+   $msg .= "<span style='font-size:100px;'>" . $tcharDados[ $valor] . "</span>";
+   $valor = $tdados[2];
+   $msg .= "<span style='font-size:100px;'>" . $tcharDados[ $valor] . "</span>";
+   $valor = $tdados[3];
+   $msg .= "<span style='font-size:100px;'>" . $tcharDados[ $valor] . "</span>";
+   $valor = $tdados[4];
+   $msg .= "<span style='font-size:100px;'>" . $tcharDados[ $valor] . "</span>";
+
+  return $msg;
+}
+
+/* Programa principal */
+
+$dadosJugador1 = generarDados($numdados);
+$dadosJugador2 = generarDados($numdados);
+$puntosJugado1 = calcularPuntos($dadosJugador1);
+$puntosJugado2 = calcularPuntos($dadosJugador2);
+
+
+$msgGanador    = generarMensajeGanador($puntosJugado1, $puntosJugado2);
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    Cinco dados.
+
+  </title>
+
+</head>
+
+<body>
+  <h1>Cinco dados</h1>
+
+  <p>Actualice la página para mostrar una nueva tirada.</p>
+
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Jugador 1</th>
+        <td style="padding: 10px; background-color: red;">
+          <?= generarImagenes($dadosJugador1); ?>
+
+        </td>
+        <th> <?= $puntosJugado1; ?> puntos</th>
+      </tr>
+      <tr>
+        <th>Jugador 2</th>
+        <td style="padding: 10px; background-color: blue;">
+          <?= generarImagenes($dadosJugador2); ?>
+
+        </td>
+        <th> <?= $puntosJugado2 ?> puntos</th>
+      </tr>
+      <tr>
+        <th>Resultado</th>
+        <td><?= $msgGanador ?></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer>
+    <p><u>By Aaron Garcia </u></p>
+  </footer>
+</body>
+
+</html>
