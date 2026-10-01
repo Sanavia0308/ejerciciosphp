@@ -39,18 +39,7 @@ function generarDados(int $numdados): array
  */
 function calcularPuntos( array $tdados): int
 {
-  global $numdados;
-  $maximo=0;
-  $minimo=7;
-   for ($i = 0; $i < $numdados; $i++) {
-    if ($tdados[$i]<$minimo){
-      $minimo=$tdados[$i];
-    }
-    if ($tdados[$i]>$maximo){
-      $maximo=$tdados[$i];
-    }
-    return array_sum($tdados) - $maximo - $minimo;
-}
+ return array_sum($tdados)-min($tdados)-max($tdados);
 }
 
 /**
