@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="captura.css">
+    <title>subirimagen</title>
+</head>
+<body>
+    <form action="index.php" method="POST" enctype="multipart/form-data">
+        <h2>Formulario de jugador</h2>
+
+        <input type="hidden" name="MAX_FILE_SIZE" value="10240" />
+
+        <label for="nombre">nombre</label><br>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="alias">Alias:</label><br>
+        <input type="text" id="alias" name="alias" required><br><br>
+
+        <label for="edad">Edad:</label><br>
+        <input type="number" id="edad" name="edad" min="1" max="120" required><br><br>
+
+        <fieldset>
+            <legend>Armas a elegir (puedes elegir varias):</legend>
+            <input type="checkbox" name="armas[]" value="Maza"> Maza<br>
+            <input type="checkbox" name="armas[]" value="Antorcha"> Antorcha<br>
+            <input type="checkbox" name="armas[]" value="Martillo"> Martillo<br>
+            <input type="checkbox" name="armas[]" value="Látigo"> Látigo<br>
+        </fieldset><br>
+
+        <fieldset>
+        <legend>¿Practica artes mágicas?</legend>
+        <input type="radio" name="magia" value="Sí" required> Sí<br>
+        <input type="radio" name="magia" value="No"> No<br>
+        </fieldset><br>
+
+        <label for="imagen">Subir imagen (solo PNG, máx. 10 KB):</label><br>
+        <input type="file" id="imagen" name="imagen" accept="image/png"><br><br>
+
+        <input type="submit" value="Enviar">
+        <input type="reset" value="Borrar">
+    </form>
+    
+</body>
+</html>
