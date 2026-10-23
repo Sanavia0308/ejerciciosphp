@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         font-weight: bold; 
         margin-top: 5px; 
     }
-</style>
+</style> 
 </head>
 <body>
 
