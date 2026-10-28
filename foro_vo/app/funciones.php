@@ -18,7 +18,31 @@ function contarp($comentario){
    return $palabras+1;
 }
 
-function letrarep($comentario){
-   $letrarep="";
-   /////////
+function letraMasrepetida ($cadenaletras){
+    $cadena = mb_str_split($cadenaletras);
+    $vecesMax = 0;
+    $letraMax = ''; 
+    $tamaño = count($cadena);
+    for ($i=0; $i<$tamaño; $i++ ) {
+        $veces = 1;
+        $letrai = $cadena[$i];
+        for ($j=$i+1; $j<$tamaño; $j++ ){
+            if ( $letrai == $cadena[$j]){
+                $veces++;
+            }
+        }
+        if ( $veces > $vecesMax){
+                $letraMax = $letrai;
+                $vecesMax = $veces;
+        }
+      }
+    return $letraMax;  
 }
+
+function palabraMasrepetida ($cadena){
+    $palabras = str_word_count($cadena,1);
+    $palabrasveces = array_count_values($palabras);
+   
+    asort($palabrasveces);
+    return array_key_last($palabrasveces); 
+ }
